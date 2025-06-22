@@ -22,7 +22,7 @@ It was developed as part of my **"Graphical User Interface Design"** course.
 
 ## Preview
 
-![Screenshot 1](./images/ss1.png)  
+![Screenshot 1](./images/ss1.png)      
 ![Screenshot 2](./images/ss2.png)
 
 ## Installation
