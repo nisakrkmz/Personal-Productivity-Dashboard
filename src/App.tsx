@@ -8,6 +8,7 @@ import Header from './components/layout/Header';
 import SchoolPage from './pages/SchoolPage';
 import BlogPages from './pages/BlogPage';
 import SchedulePage from './pages/SchedulePage';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </main>
+          <Footer />
         </div>
       </Router>
     </AppProvider>
