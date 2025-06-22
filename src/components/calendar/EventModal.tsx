@@ -57,15 +57,22 @@ export default function EventModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-start pt-20 z-50">
+    <div
+      className="fixed inset-0 flex justify-center items-start pt-20 z-50"
+      style={{ backgroundColor: 'rgba(191, 219, 254, 0.7)' }}
+    >
       <div className="bg-white rounded-2xl p-8 w-full max-w-md shadow-xl border border-gray-200">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">
             {event ? 'Etkinliği Düzenle' : 'Yeni Etkinlik'}
           </h2>
-          <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors">
-            <X className="w-6 h-6" />
-          </button>
+         <button
+          onClick={onClose}
+          className="p-2 !bg-blue-200 text-black hover:!bg-blue-300 rounded-full transition-colors"
+          style={{ backgroundColor: '#bfdbfe' }}
+        >
+          <X className="w-6 h-6" />
+        </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -128,14 +135,15 @@ export default function EventModal({
               )}
             </div>
             <button
-              type="submit"
-              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-md hover:shadow-lg transition-all"
-            >
-              {event ? 'Değişiklikleri Kaydet' : 'Ekle'}
-            </button>
+          type="submit"
+          className="px-6 py-3 !bg-blue-200 text-black font-semibold rounded-lg hover:!bg-blue-300 shadow-md hover:shadow-lg transition-all"
+          style={{ backgroundColor: '#bfdbfe' }}
+        >
+          {event ? 'Değişiklikleri Kaydet' : 'Ekle'}
+        </button>
           </div>
         </form>
       </div>
     </div>
   );
-} 
+}

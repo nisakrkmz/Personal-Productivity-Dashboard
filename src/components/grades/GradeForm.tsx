@@ -20,7 +20,7 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
   });
 
   const calculateFinalGrade = (midterm: number, final: number) => {
-    return (midterm * 0.4) + (final * 0.6);
+    return midterm * 0.4 + final * 0.6;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,11 +33,18 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
   const isPassing = finalGrade >= 60;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50"
+      style={{ backgroundColor: 'rgba(191, 219, 254, 0.6)' }}
+    >
+      <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl border border-gray-200">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Yeni Not Ekle</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button
+            onClick={onClose}
+            className="p-2 bg-blue-200 text-black hover:bg-blue-300 rounded-full transition-colors"
+            style={{ backgroundColor: '#bfdbfe' }}
+          >
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -49,7 +56,7 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
               type="text"
               value={formData.subject}
               onChange={e => setFormData({ ...formData, subject: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 bg-gray-50 p-2"
               required
             />
           </div>
@@ -62,7 +69,7 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
               max="100"
               value={formData.midterm}
               onChange={e => setFormData({ ...formData, midterm: Number(e.target.value) })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 bg-gray-50 p-2"
               required
             />
           </div>
@@ -75,7 +82,7 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
               max="100"
               value={formData.final}
               onChange={e => setFormData({ ...formData, final: Number(e.target.value) })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 bg-gray-50 p-2"
               required
             />
           </div>
@@ -97,13 +104,15 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+              className="px-4 py-2 rounded-lg bg-blue-200 text-black hover:bg-blue-300 transition-colors"
+              style={{ backgroundColor: '#bfdbfe' }}
             >
               İptal
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-600 text-gray-600 rounded-lg hover:bg-blue-700"
+              className="px-4 py-2 rounded-lg bg-blue-200 text-black hover:bg-blue-300 transition-colors font-semibold"
+              style={{ backgroundColor: '#bfdbfe' }}
             >
               Ekle
             </button>
@@ -112,4 +121,4 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
       </div>
     </div>
   );
-} 
+}
