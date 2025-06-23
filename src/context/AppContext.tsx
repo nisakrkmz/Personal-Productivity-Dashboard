@@ -10,6 +10,7 @@ interface Todo {
 }
 
 interface Grade {
+  id: string;
   subject: string;
   midterm: number;
   final: number;
@@ -31,7 +32,9 @@ interface AppContextType {
   addTodo: (todo: Omit<Todo, 'id'>) => void;
   toggleTodo: (id: string) => void;
   deleteTodo: (id: string) => void;
-  addGrade: (grade: Omit<Grade, 'average'>) => void;
+  addGrade: (grade: Omit<Grade, 'id' | 'average'>) => void;
+  updateGrade: (grade: Grade) => void;
+  deleteGrade: (id: string) => void;
   addEvent: (event: Omit<Event, 'id'>) => void;
   deleteEvent: (id: string) => void;
 }
@@ -40,7 +43,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
-  const [grades, setGrades] = useState<Grade[]>(initialGrades);
+  const [grades, setGrades] = useState<Grade[]>(initialGrades as Grade[]);
   const [events, setEvents] = useState<Event[]>(initialEvents as Event[]);
 
   const addTodo = (todo: Omit<Todo, 'id'>) => {
@@ -57,9 +60,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const addGrade = (grade: Omit<Grade, 'average'>) => {
-    const average = (grade.midterm + grade.final) / 2;
-    setGrades([...grades, { ...grade, average }]);
+  const addGrade = (grade: Omit<Grade, 'id' | 'average'>) => {
+    const average = grade.midterm * 0.4 + grade.final * 0.6;
+    setGrades([...grades, { ...grade, id: crypto.randomUUID(), average }]);
+  };
+
+  const updateGrade = (updated: Grade) => {
+    setGrades(grades.map(g => g.id === updated.id ? updated : g));
+  };
+
+  const deleteGrade = (id: string) => {
+    setGrades(grades.filter(g => g.id !== id));
   };
 
   const addEvent = (event: Omit<Event, 'id'>) => {
@@ -79,6 +90,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       toggleTodo,
       deleteTodo,
       addGrade,
+      updateGrade,
+      deleteGrade,
       addEvent,
       deleteEvent,
     }}>

@@ -5,45 +5,43 @@ interface Grade {
   subject: string;
   midterm: number;
   final: number;
+  average: number;
 }
 
 interface GradeFormProps {
   onSubmit: (grade: Grade) => void;
   onClose: () => void;
+  initialData?: Grade;
 }
 
-export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
-  const [formData, setFormData] = useState<Grade>({
-    subject: '',
-    midterm: 0,
-    final: 0,
-  });
+export default function GradeForm({ onSubmit, onClose, initialData }: GradeFormProps) {
+  const [formData, setFormData] = useState<Grade>(
+    initialData || { subject: '', midterm: 0, final: 0, average: 0 }
+  );
 
-  const calculateFinalGrade = (midterm: number, final: number) => {
-    return midterm * 0.4 + final * 0.6;
-  };
+  const calculateAverage = (midterm: number, final: number) =>
+    midterm * 0.4 + final * 0.6;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    const average = calculateAverage(formData.midterm, formData.final);
+    onSubmit({ ...formData, average });
     onClose();
   };
 
-  const finalGrade = calculateFinalGrade(formData.midterm, formData.final);
-  const isPassing = finalGrade >= 60;
+  const average = calculateAverage(formData.midterm, formData.final);
+  const isPassing = average >= 60;
 
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center z-50"
-      style={{ backgroundColor: 'rgba(191, 219, 254, 0.6)' }}
-    >
+    <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: 'rgba(191, 219, 254, 0.6)' }}>
       <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl border border-gray-200">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Yeni Not Ekle</h2>
+          <h2 className="text-xl font-semibold">
+            {initialData ? 'Notu Düzenle' : 'Yeni Not Ekle'}
+          </h2>
           <button
             onClick={onClose}
             className="p-2 bg-blue-200 text-black hover:bg-blue-300 rounded-full transition-colors"
-            style={{ backgroundColor: '#bfdbfe' }}
           >
             <X className="w-5 h-5" />
           </button>
@@ -90,7 +88,7 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
           <div className="p-3 bg-gray-50 rounded-lg">
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium text-gray-700">Ortalama:</span>
-              <span className="text-lg font-semibold">{finalGrade.toFixed(2)}</span>
+              <span className="text-lg font-semibold">{average.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-center mt-1">
               <span className="text-sm font-medium text-gray-700">Durum:</span>
@@ -105,16 +103,14 @@ export default function GradeForm({ onSubmit, onClose }: GradeFormProps) {
               type="button"
               onClick={onClose}
               className="px-4 py-2 rounded-lg bg-blue-200 text-black hover:bg-blue-300 transition-colors"
-              style={{ backgroundColor: '#bfdbfe' }}
             >
               İptal
             </button>
             <button
               type="submit"
               className="px-4 py-2 rounded-lg bg-blue-200 text-black hover:bg-blue-300 transition-colors font-semibold"
-              style={{ backgroundColor: '#bfdbfe' }}
             >
-              Ekle
+              {initialData ? 'Güncelle' : 'Ekle'}
             </button>
           </div>
         </form>

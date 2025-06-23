@@ -12,7 +12,7 @@ const motivationQuotes = [
   },
   {
     text: "O halde önemli bir işi bitirince hemen diğerine koyul.Ve yalnız rabbine yönel.",
-    author: " İnşirah,94 /7-8"
+    source: " İnşirah,94 /7-8"
   },
   {
     text: "Bir yandan korkun bir yandan umudun varsa iki kanatlı olursun; tek kanatla uçulmaz zaten.",
@@ -20,7 +20,7 @@ const motivationQuotes = [
   },
   {
     text: "Muhakkak her zorlukla beraber bir kolaylık vardır.",
-    author: " İnşirah,94 /5"
+    source: " İnşirah,94 /5"
   }
 ];
 

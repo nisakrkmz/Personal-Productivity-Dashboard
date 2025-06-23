@@ -21,18 +21,21 @@ export const initialTodos = [
 
 export const initialGrades = [
   {
+    id: '1',
     subject: 'Matematik',
     midterm: 75,
     final: 85,
     average: 80,
   },
   {
+    id: '2',
     subject: 'Fizik',
     midterm: 65,
     final: 70,
     average: 67.5,
   },
   {
+    id: '3',
     subject: 'İngilizce',
     midterm: 90,
     final: 95,

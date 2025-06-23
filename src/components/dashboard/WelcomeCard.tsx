@@ -2,7 +2,7 @@ import { Sun } from 'lucide-react';
 
 export default function WelcomeCard() {
   const currentHour = new Date().getHours();
-  const greeting = currentHour < 12 ? 'Günaydın' : currentHour < 18 ? 'İyi Günler' : 'İyi Akşamlar';
+  const greeting = currentHour < 12 ? 'Hayırlı sabahlar' : currentHour < 18 ? 'İyi Günler' : 'İyi Akşamlar';
 
   return (
     <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-white">
